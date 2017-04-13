@@ -48,6 +48,7 @@ const generator = async () => {
   spinner.start();
   await executioner(`git clone git@github.com:antistatique/antistapress.git ${nameSlugified}`);
   await executioner(`rm -r ${nameSlugified}/.git`);
+  await executioner(`rm ${nameSlugified}/.gitignore`);
   await executioner(`mv ${nameSlugified}/web/app/themes/antistapress ${nameSlugified}/web/app/themes/${themeSlugified || nameSlugified}`);
   const styleContent = await fs.readFileSync(`${nameSlugified}/web/app/themes/${themeSlugified || nameSlugified}/style.css`);
   await fs.writeFileSync(`${nameSlugified}/web/app/themes/${themeSlugified || nameSlugified}/style.css`, styleContent.toString('utf-8').replace(/THEME_NAME/g, argv.theme || argv.name));
